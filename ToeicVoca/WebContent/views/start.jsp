@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>토익 테스트 웹 어플리케이션 - 로그인</title>
+<title>토익 테스트 - 로그인</title>
 </head>
 <body>
 	<div>

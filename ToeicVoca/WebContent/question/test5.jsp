@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="EUC-KR"%>
 	<article>
-		<form action="${pageContext.request.contextPath}/vocamanage?action=#" method="post">
+		<form action="${pageContext.request.contextPath}/vocamanage?action=result" method="post">
 		<div class="question">
 			<p><b>${matter13.getNum()}. ${matter13.getMatter()}</b></p>
 			<div>

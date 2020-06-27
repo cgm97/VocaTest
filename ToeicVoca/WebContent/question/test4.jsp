@@ -5,23 +5,23 @@
 		<div class="question">
 			<p><b>${matter10.getNum()}. ${matter10.getMatter()}</b></p>
 			<div>
- 			<input type="radio" name="q1" value="2" required/>(1). ~보다 앞선 <br>
-			<input type="radio" name="q1" value="1"/>(2). 제대로 된, 적법한<br>
+ 			<input type="radio" name="q10" value="2" required/>(1). ~보다 앞선 <br>
+			<input type="radio" name="q10" value="1"/>(2). 제대로 된, 적법한<br>
 			</div>
 		</div>	
 		<div class="question">
 			<p><b>${matter11.getNum()}. ${matter11.getMatter()}</b></p>
 			<div>
-			<input type="radio" name="q2" value="1" required />(1). 형) 이전의, (~보다)우선하는<br>
-		 	<input type="radio" name="q2" value="2"/>(2). 형) 늦게, (~보다)늦는 <br>
+			<input type="radio" name="q11" value="1" required />(1). 형) 이전의, (~보다)우선하는<br>
+		 	<input type="radio" name="q11" value="2"/>(2). 형) 늦게, (~보다)늦는 <br>
 
 			</div>
 		</div>
 		<div class="question">
 			<p><b>${matter12.getNum()}. ${matter12.getMatter()}</b></p>
 			<div>
- 			<input type="radio" name="q3" value="1" required/>(1). 성과 평가 <br>
-			<input type="radio" name="q3" value="2"/>(2). 축제준비<br>
+ 			<input type="radio" name="q12" value="1" required/>(1). 성과 평가 <br>
+			<input type="radio" name="q12" value="2"/>(2). 축제준비<br>
 			</div>
 		</div>	
 		<div style="padding-top:50px; text-align: left;">
