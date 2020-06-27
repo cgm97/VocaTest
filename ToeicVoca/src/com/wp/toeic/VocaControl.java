@@ -115,16 +115,19 @@ public class VocaControl extends HttpServlet {
 				} 
 				session.setAttribute("check", "test1.jsp");
 				session.setAttribute("check_matter", new ArrayList<String>());
+				session.setAttribute("check_score", new ArrayList<Integer>());
 				viewName = "/views/voca_test.jsp";
 			}
 			
 			//테스트 선택 및 문제 4~6번
 			else if(action.equals("voca_test2")) {
 				List<String> checkmatter = (List<String>)session.getAttribute("check_matter");
+				List<Integer> checkscore = (List<Integer>)session.getAttribute("check_score");
 				//문제 답 체크
 				int q1 = Integer.parseInt(request.getParameter("q1"));
 				if(q1==1) {
 					checkmatter.add("1번 정답");
+					checkscore.add(q1);
 				}
 				else {
 					checkmatter.add("1번 오답");
@@ -132,6 +135,7 @@ public class VocaControl extends HttpServlet {
 				int q2 = Integer.parseInt(request.getParameter("q2"));
 				if(q2==1) {
 					checkmatter.add("2번 정답");
+					checkscore.add(q2);
 				}
 				else {
 					checkmatter.add("2번 오답");
@@ -139,6 +143,7 @@ public class VocaControl extends HttpServlet {
 				int q3 = Integer.parseInt(request.getParameter("q3"));
 				if(q3==1) {
 					checkmatter.add("3번 정답");
+					checkscore.add(q3);
 				}
 				else {
 					checkmatter.add("3번 오답");
@@ -159,10 +164,12 @@ public class VocaControl extends HttpServlet {
 			//테스트 선택 및 문제 7~9번
 			else if(action.equals("voca_test3")) {
 				List<String> checkmatter = (List<String>)session.getAttribute("check_matter");
+				List<Integer> checkscore = (List<Integer>)session.getAttribute("check_score");
 				//문제 답 체크
 				int q4 = Integer.parseInt(request.getParameter("q4"));
 				if(q4==1) {
 					checkmatter.add("4번 정답");
+					checkscore.add(q4);
 				}
 				else {
 					checkmatter.add("4번 오답");
@@ -170,6 +177,7 @@ public class VocaControl extends HttpServlet {
 				int q5 = Integer.parseInt(request.getParameter("q5"));
 				if(q5==1) {
 					checkmatter.add("5번 정답");
+					checkscore.add(q5);
 				}
 				else {
 					checkmatter.add("5번 오답");
@@ -177,6 +185,7 @@ public class VocaControl extends HttpServlet {
 				int q6 = Integer.parseInt(request.getParameter("q6"));
 				if(q6==1) {
 					checkmatter.add("6번 정답");
+					checkscore.add(q6);
 				}
 				else {
 					checkmatter.add("6번 오답");
@@ -197,10 +206,12 @@ public class VocaControl extends HttpServlet {
 			//테스트 선택 및 문제 10~12번
 			else if(action.equals("voca_test4")) {
 				List<String> checkmatter = (List<String>)session.getAttribute("check_matter");
+				List<Integer> checkscore = (List<Integer>)session.getAttribute("check_score");
 				//문제 답 체크
 				int q7 = Integer.parseInt(request.getParameter("q7"));
 				if(q7==1) {
 					checkmatter.add("7번 정답");
+					checkscore.add(q7);
 				}
 				else {
 					checkmatter.add("7번 오답");
@@ -208,6 +219,7 @@ public class VocaControl extends HttpServlet {
 				int q8 = Integer.parseInt(request.getParameter("q8"));
 				if(q8==1) {
 					checkmatter.add("8번 정답");
+					checkscore.add(q8);
 				}
 				else {
 					checkmatter.add("8번 오답");
@@ -215,6 +227,7 @@ public class VocaControl extends HttpServlet {
 				int q9 = Integer.parseInt(request.getParameter("q9"));
 				if(q9==1) {
 					checkmatter.add("9번 정답");
+					checkscore.add(q9);
 				}
 				else {
 					checkmatter.add("9번 오답");
@@ -235,10 +248,12 @@ public class VocaControl extends HttpServlet {
 			//테스트 선택 및 문제 13~15번
 			else if(action.equals("voca_test5")) {
 				List<String> checkmatter = (List<String>)session.getAttribute("check_matter");
+				List<Integer> checkscore = (List<Integer>)session.getAttribute("check_score");
 				//문제 답 체크
 				int q10 = Integer.parseInt(request.getParameter("q10"));
 				if(q10==1) {
 					checkmatter.add("10번 정답");
+					checkscore.add(q10);
 				}
 				else {
 					checkmatter.add("10번 오답");
@@ -246,6 +261,7 @@ public class VocaControl extends HttpServlet {
 				int q11 = Integer.parseInt(request.getParameter("q11"));
 				if(q11==1) {
 					checkmatter.add("11번 정답");
+					checkscore.add(q11);
 				}
 				else {
 					
@@ -254,6 +270,7 @@ public class VocaControl extends HttpServlet {
 				int q12 = Integer.parseInt(request.getParameter("q12"));
 				if(q12==1) {
 					checkmatter.add("12번 정답");
+					checkscore.add(q12);
 				}
 				else {
 					checkmatter.add("12번 오답");
@@ -272,10 +289,12 @@ public class VocaControl extends HttpServlet {
 			}
 			else if(action.equals("result")) {
 				List<String> checkmatter = (List<String>)session.getAttribute("check_matter");
+				List<Integer> checkscore = (List<Integer>)session.getAttribute("check_score");
 				//문제 답 체크
 				int q13 = Integer.parseInt(request.getParameter("q13"));
 				if(q13==1) {
 					checkmatter.add("13번 정답");
+					checkscore.add(q13);
 				}
 				else {
 					checkmatter.add("13번 오답");
@@ -283,18 +302,24 @@ public class VocaControl extends HttpServlet {
 				int q14 = Integer.parseInt(request.getParameter("q14"));
 				if(q14==1) {
 					checkmatter.add("14번 정답");
+					checkscore.add(q14);
 				}
-				else {
-					
+				else {				
 					checkmatter.add("14번 오답");
 				}
 				int q15 = Integer.parseInt(request.getParameter("q15"));
 				if(q15==1) {
 					checkmatter.add("15번 정답");
+					checkscore.add(q15);
 				}
 				else {
 					checkmatter.add("15번 오답");
 				}
+				
+				//점수 계산
+				int score = dao.totalScore(checkscore);
+				session.setAttribute("check_score", score);
+				
 				viewName = "/views/voca_result.jsp";
 			}
 		}

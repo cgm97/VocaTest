@@ -6,6 +6,19 @@ public class ToeicDTO {
 	String name;
 	String num;
 	String matter;
+	int score;
+	
+	ToeicDTO(){		
+	}
+	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
 	public String getNum() {
 		return num;
 	}
@@ -20,9 +33,6 @@ public class ToeicDTO {
 
 	public void setMatter(String matter) {
 		this.matter = matter;
-	}
-
-	ToeicDTO(){		
 	}
 
 	public String getId() {

@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 public class ToeicDAO {
 	private String jdbcDriver;
@@ -15,7 +16,6 @@ public class ToeicDAO {
 	
 	private Connection conn = null;
 	private Statement stmt = null;
-
 	public ToeicDAO(String jdbcDriver, String dbUrl, String dbUserId, String dbPasswd) {
 		this.jdbcDriver = jdbcDriver;
 		this.dbUrl = dbUrl;
@@ -45,21 +45,22 @@ public class ToeicDAO {
 		//로그인처리 및 사용자 이름 찾아내기
 		public String login(String id , String pw) throws ClassNotFoundException, SQLException {
 			connectDB();
-			PreparedStatement stmt = null;
+			PreparedStatement pstmt = null;
 			
 			String name=null;
 			
 			String sql = "select * from studentinfo where id=? and pw=?";
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, id);
-			stmt.setString(2, pw);
-			ResultSet rs = stmt.executeQuery();	
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			ResultSet rs = pstmt.executeQuery();	
 			
 			if(rs.next()) //아이디 존재하면 사용자의 이름 저장
 			{
 				name = rs.getString("name");
 			}
 			rs.close();
+			pstmt.close();
 			disconnectDB();
 			return name;
 		}
@@ -68,16 +69,17 @@ public class ToeicDAO {
 		public int insertuser(ToeicDTO dto) throws ClassNotFoundException, SQLException {
 			int check=0;
 			connectDB();
-			PreparedStatement stmt = null;
+			PreparedStatement pstmt = null;
 			
 			String sql = "insert into studentinfo(id,pw,name) values(?,?,?)";
-			stmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			
-			stmt.setString(1, dto.getId());
-			stmt.setString(2, dto.getPw());
-			stmt.setString(3, dto.getName());		
-			stmt.executeUpdate();
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getPw());
+			pstmt.setString(3, dto.getName());		
+			pstmt.executeUpdate();
 			
+			pstmt.close();
 			disconnectDB();
 			return check;
 		}
@@ -86,18 +88,30 @@ public class ToeicDAO {
 		public ToeicDTO research(int i) throws ClassNotFoundException, SQLException {
 			connectDB();
 			ToeicDTO dto = new ToeicDTO();
-			PreparedStatement stmt = null;
+			PreparedStatement pstmt = null;
 			ResultSet rs = null;
 			
 			String sql = "select * from questinfo where num=?";
-			stmt = conn.prepareStatement(sql);	
-			stmt.setInt(1, i);
-			rs = stmt.executeQuery();
+			pstmt = conn.prepareStatement(sql);	
+			pstmt.setInt(1, i);
+			rs = pstmt.executeQuery();
 			if (rs.next()) {					
 				dto.setNum(rs.getString("num"));
 				dto.setMatter(rs.getNString("matter"));		
 			}
+			
+			pstmt.close();
+			disconnectDB();
 			return dto;
+		}
+		
+		//점수
+		public int totalScore(List<Integer> resultScore) {
+			int score=0;
+			for(Integer correct_matter : resultScore) {
+				score += correct_matter;
+			}
+			return score;
 		}
 				
 }
