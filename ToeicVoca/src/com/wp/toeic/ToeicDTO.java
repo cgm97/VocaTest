@@ -10,7 +10,7 @@ public class ToeicDTO {
 	
 	ToeicDTO(){		
 	}
-	
+
 	public int getScore() {
 		return score;
 	}

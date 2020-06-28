@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ToeicDAO {
@@ -100,18 +101,61 @@ public class ToeicDAO {
 				dto.setMatter(rs.getNString("matter"));		
 			}
 			
+			rs.close();
 			pstmt.close();
 			disconnectDB();
 			return dto;
 		}
 		
-		//점수
+		//점수 계산
 		public int totalScore(List<Integer> resultScore) {
 			int score=0;
 			for(Integer correct_matter : resultScore) {
 				score += correct_matter;
 			}
 			return score;
+		}
+		
+		//점수 등록
+		public int inserscore(ToeicDTO dto) throws ClassNotFoundException, SQLException {
+			int check=0;
+			connectDB();
+			PreparedStatement pstmt = null;
+			
+			String sql = "insert into resultinfo(id,name,result) values(?,?,?)";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getName());
+			pstmt.setInt(3, dto.getScore());		
+			pstmt.executeUpdate();
+			
+			pstmt.close();
+			disconnectDB();
+			return check;
+		}
+		
+		//결과 리스트
+		public List<ToeicDTO> getSaveResult(String id) throws ClassNotFoundException, SQLException {
+			ArrayList<ToeicDTO> savelist = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			connectDB();
+			
+			String sql = "select * from resultinfo where id=?";
+			pstmt = conn.prepareStatement(sql);	
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			savelist = new ArrayList<ToeicDTO>();
+			while(rs.next()) {
+				ToeicDTO dto = new ToeicDTO();
+				dto.setName(rs.getString("name"));
+				dto.setScore(rs.getInt("result"));
+				savelist.add(dto);
+			}
+			return savelist;
 		}
 				
 }

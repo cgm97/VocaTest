@@ -47,7 +47,6 @@ public class VocaControl extends HttpServlet {
 			session.setAttribute("dao", dao);
 		}
 
-		String pathInfo = request.getPathInfo();
 		String action = request.getParameter("action");
 		String viewName = null;
 		
@@ -61,10 +60,11 @@ public class VocaControl extends HttpServlet {
 					//로그인 후 사용자 이름 불리옴
 					String user = (String) dao.login(ID, PW);
 					if(user!=null) { //로그인 성공
-						session.setAttribute("id",user);
+						session.setAttribute("id",ID);
+						session.setAttribute("username",user);	
 						viewName = "/views/voca_info.jsp";
 						//로그인한 아이디 세션 저장
-						session.setAttribute("username",user);	
+						
 					}
 					else {//로그인실패 ##### 리다이랙션해야함 변경예정
 						viewName = "/views/start.jsp";
@@ -287,6 +287,8 @@ public class VocaControl extends HttpServlet {
 				viewName = "/views/voca_test.jsp";
 				session.setAttribute("check", "test5.jsp");
 			}
+			
+			//점수 결과화면
 			else if(action.equals("result")) {
 				List<String> checkmatter = (List<String>)session.getAttribute("check_matter");
 				List<Integer> checkscore = (List<Integer>)session.getAttribute("check_score");
@@ -322,6 +324,49 @@ public class VocaControl extends HttpServlet {
 				
 				viewName = "/views/voca_result.jsp";
 			}
+			
+			//시험 점수 저장 및 리스트
+			else if(action.equals("save_result")){
+				//점수 저장
+				int score = (Integer)session.getAttribute("check_score");
+				String id = (String)session.getAttribute("id");
+				String name = (String)session.getAttribute("username");
+				
+				ToeicDTO dto = new ToeicDTO();
+				
+				dto.setId(id);
+				dto.setName(name);
+				dto.setScore(score);
+				
+				//List객체 DB연결
+				List<ToeicDTO> resultList = null;
+				try {
+					//점수 결과 DB 저장
+					dao.inserscore(dto);
+					
+					//저장된 점수 결과 DB에서 반환
+					resultList = dao.getSaveResult(id);
+					request.setAttribute("result_list", resultList);
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				viewName = "/views/result_list.jsp";
+			}
+			
+			//테스트x direct 회차정보
+			else if(action.equals("load_result")){
+				String id = (String)session.getAttribute("id");
+				List<ToeicDTO> resultList = null;
+				try {
+					resultList = dao.getSaveResult(id);
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				request.setAttribute("result_list", resultList);
+				viewName = "/views/result_list.jsp";
+			}
 		}
 		
 		if (viewName != null) {
@@ -330,9 +375,6 @@ public class VocaControl extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
