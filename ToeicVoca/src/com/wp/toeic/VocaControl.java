@@ -60,14 +60,13 @@ public class VocaControl extends HttpServlet {
 					//로그인 후 사용자 이름 불리옴
 					String user = (String) dao.login(ID, PW);
 					if(user!=null) { //로그인 성공
+						//로그인한 아이디 , 이름 세션에 저장
 						session.setAttribute("id",ID);
 						session.setAttribute("username",user);	
-						viewName = "/views/voca_info.jsp";
-						//로그인한 아이디 세션 저장
-						
+						viewName = "/views/voca_info.jsp";										
 					}
-					else {//로그인실패 ##### 리다이랙션해야함 변경예정
-						viewName = "/views/start.jsp";
+					else {//로그인실패 
+						viewName = "redirect:/views/start.jsp";
 					}
 				} catch (ClassNotFoundException | SQLException e) {
 					e.printStackTrace();
@@ -94,12 +93,12 @@ public class VocaControl extends HttpServlet {
 				try {//db 연결 후 처리
 					dao.insertuser(dto);
 					//회원가입 성공
-					viewName = "/views/start.jsp";
+					viewName = "redirect:/views/start.jsp";
 				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					//회원가입 실패
-					viewName = "/views/user_insert.jsp";
+					viewName = "redirect:/views/user_insert.jsp";
 				}
 			}
 			//테스트 선택 및 문제 1~3번
@@ -370,8 +369,14 @@ public class VocaControl extends HttpServlet {
 		}
 		
 		if (viewName != null) {
-		RequestDispatcher view = request.getRequestDispatcher(viewName);
-		view.forward(request, response);
+			if (viewName.contains("redirect:")) {
+				String location = viewName.split(":")[1];
+				response.sendRedirect(request.getContextPath() + location);
+			}
+			else {
+				RequestDispatcher view = request.getRequestDispatcher(viewName);
+				view.forward(request, response);
+			}
 		}
 	}
 

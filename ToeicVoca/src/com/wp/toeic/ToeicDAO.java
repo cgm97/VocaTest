@@ -155,6 +155,10 @@ public class ToeicDAO {
 				dto.setScore(rs.getInt("result"));
 				savelist.add(dto);
 			}
+			
+			rs.close();
+			pstmt.close();
+			disconnectDB();
 			return savelist;
 		}
 				
