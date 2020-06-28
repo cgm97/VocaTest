@@ -22,7 +22,6 @@
     document.onkeydown = noEvent;
 </script>
 	<h1>모의 토익 VOCA 단어 시험</h1>
-	${check_matter}
 	 <myTags:login_username />
 	 <jsp:include page="/question/${check}"></jsp:include>
 </body>
