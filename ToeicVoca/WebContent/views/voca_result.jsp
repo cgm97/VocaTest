@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h1>모의 토익 VOCA 단어 시험 - 결과</h1>
-	<myTags:login_username />
+	<myTags:username_logout />
 	<form action="${pageContext.request.contextPath}/vocamanage?action=save_result" method="post">
 		<div>
 			<!-- 문제별 정답 체크 -->

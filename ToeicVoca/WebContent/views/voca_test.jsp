@@ -22,7 +22,7 @@
     document.onkeydown = noEvent;
 </script>
 	<h1>모의 토익 VOCA 단어 시험</h1>
-	 <myTags:login_username />
+	 <myTags:username_logout />
 	 <jsp:include page="/question/${check}"></jsp:include>
 </body>
 </html>

@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h1>모의 토익 VOCA</h1>
-	 <myTags:login_username />
+	 <myTags:username_logout />
 	 <myTags:voca_info />	 
 </body>
 </html>

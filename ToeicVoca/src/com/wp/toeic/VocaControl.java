@@ -101,6 +101,11 @@ public class VocaControl extends HttpServlet {
 					viewName = "redirect:/views/user_insert.jsp";
 				}
 			}
+			//로그아웃
+			else if(action.equals("logout")) {
+				session.invalidate();
+				viewName = "redirect:/views/start.jsp";
+			}
 			//테스트 선택 및 문제 1~3번
 			else if(action.equals("voca_test1")) {	
 				try {

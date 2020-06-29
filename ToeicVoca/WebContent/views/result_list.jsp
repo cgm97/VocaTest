@@ -11,7 +11,7 @@
 	</head>
 <body>
 	<h1>모의 토익 VOCA 단어 시험 - 결과모음</h1>
-	<myTags:login_username />
+	<myTags:username_logout />
 	<c:forEach var="list" items="${result_list}" varStatus="i">
 		<b>${i.count}회차</b> 점수는 <b>${list.getScore()}점</b> 입니다.<br><br>
 	</c:forEach>
