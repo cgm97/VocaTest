@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>토익 테스트 - 선택</title>
+<title>토익 테스트 - 마이페이지</title>
 </head>
 <body>
 	<h1>모의 토익 VOCA</h1>

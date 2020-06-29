@@ -143,7 +143,7 @@ public class ToeicDAO {
 			
 			connectDB();
 			
-			String sql = "select * from resultinfo where id=?";
+			String sql = "select * from resultinfo where id=? order by col asc";
 			pstmt = conn.prepareStatement(sql);	
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
