@@ -117,7 +117,7 @@ public class VocaControl extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
-				session.setAttribute("check", "test1.jsp");
+				request.setAttribute("check", "test1.jsp");
 				session.setAttribute("check_matter", new ArrayList<String>());
 				session.setAttribute("check_score", new ArrayList<Integer>());
 				viewName = "/views/voca_test.jsp";
@@ -162,7 +162,7 @@ public class VocaControl extends HttpServlet {
 					e.printStackTrace();
 				} 
 				viewName = "/views/voca_test.jsp";
-				session.setAttribute("check", "test2.jsp");
+				request.setAttribute("check", "test2.jsp");
 			}
 			
 			//테스트 선택 및 문제 7~9번
@@ -204,7 +204,7 @@ public class VocaControl extends HttpServlet {
 					e.printStackTrace();
 				} 
 				viewName = "/views/voca_test.jsp";
-				session.setAttribute("check", "test3.jsp");
+				request.setAttribute("check", "test3.jsp");
 			}
 			
 			//테스트 선택 및 문제 10~12번
@@ -246,7 +246,7 @@ public class VocaControl extends HttpServlet {
 					e.printStackTrace();
 				} 
 				viewName = "/views/voca_test.jsp";
-				session.setAttribute("check", "test4.jsp");
+				request.setAttribute("check", "test4.jsp");
 			}
 			
 			//테스트 선택 및 문제 13~15번
@@ -289,7 +289,7 @@ public class VocaControl extends HttpServlet {
 					e.printStackTrace();
 				} 
 				viewName = "/views/voca_test.jsp";
-				session.setAttribute("check", "test5.jsp");
+				request.setAttribute("check", "test5.jsp");
 			}
 			
 			//점수 결과화면
@@ -336,17 +336,17 @@ public class VocaControl extends HttpServlet {
 				String id = (String)session.getAttribute("id");
 				String name = (String)session.getAttribute("username");
 				
-				ToeicDTO dto = new ToeicDTO();
+				ToeicDTO save_score = new ToeicDTO();
 				
-				dto.setId(id);
-				dto.setName(name);
-				dto.setScore(score);
+				save_score.setId(id);
+				save_score.setName(name);
+				save_score.setScore(score);
 				
 				//List객체 DB연결
 				List<ToeicDTO> resultList = null;
 				try {
 					//점수 결과 DB 저장
-					dao.inserscore(dto);
+					dao.inserscore(save_score);
 					
 					//저장된 점수 결과 DB에서 반환
 					resultList = dao.getSaveResult(id);
